@@ -51,7 +51,7 @@ survfit.coxph <-
           for (i in temp) tfac <- tfac[,tfac[i,] ==0]  # toss out strata terms
       }
       if (any(tfac >1))
-          stop("not able to create a curve for models that contain an interaction without the lower order effect")
+          warning("not able to create a curve for models that contain an interaction without the lower order effect")
 
       Terms <- object$terms
       n <- object$n[1]
@@ -271,7 +271,7 @@ survfit.coxph <-
       }
       else if (missing(newdata)) {
           if (has.strata && strata.interaction)
-              stop ("Models with strata by covariate interaction terms require newdata")
+              warning ("Models with strata by covariate interaction terms, use predictions with care")
           offset2 <- 0
           if (length(object$means)) {
               x2 <- matrix(object$means, nrow=1, ncol=ncol(X))
